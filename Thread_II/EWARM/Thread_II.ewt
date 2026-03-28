@@ -1460,6 +1460,9 @@
                     <name>$PROJ_DIR$\..\Bsp\Drv\Src\drv_irq.c</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\..\Bsp\Drv\Src\drv_kth78.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\Bsp\Drv\Src\drv_lcd.c</name>
                 </file>
                 <file>

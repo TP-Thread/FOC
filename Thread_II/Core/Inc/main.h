@@ -64,6 +64,7 @@ extern UART_HandleTypeDef huart1;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 
 /* USER CODE END EFP */
+extern SPI_HandleTypeDef hspi1;
 
 /* Private defines -----------------------------------------------------------*/
 #define LED_B_Pin GPIO_PIN_13
@@ -100,6 +101,8 @@ extern DMA_HandleTypeDef hdma_usart1_tx;
 #define LCD_RST_GPIO_Port GPIOC
 #define LCD_RS_Pin GPIO_PIN_2
 #define LCD_RS_GPIO_Port GPIOD
+#define SPI1_CS_Pin GPIO_PIN_9
+#define SPI1_CS_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 #define led_r_on()     HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET)    

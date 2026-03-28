@@ -53,8 +53,8 @@ void driver_init(void)
     HAL_ADC_Start_DMA(&hadc2, (uint32_t *)tMC.Sample.AdcBuff, 3); // 启动常规组ADC转换，并开启DMA搬运
 
     /* 设置ABZ编码器 */
-    __HAL_TIM_ENABLE_IT(&htim3, TIM_IT_IDX);  // 使能Encoder Index中断
-    HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+    // __HAL_TIM_ENABLE_IT(&htim3, TIM_IT_IDX);  // 使能Encoder Index中断
+    // HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
     
     /* 设置初始占空比 */
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
@@ -185,6 +185,8 @@ void task_loop(void)
             LedTaskId = 20;
 
             // printf("tMC.Foc.Ubus = %.2f V\r\n", tMC.Sample.UdcReal);
+
+            printf("KTH78 Angle = %d\r\n", kth78_read_angle());
         }
     }
     break;

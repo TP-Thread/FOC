@@ -24,15 +24,15 @@ extern volatile uint16_t UsartTaskTim;
  * @brief TIM3编码器Index中断回调函数
  * @note 当编码器Z脉冲到来时触发此中断，TIM3->CNT会自动清零
  */
-void HAL_TIMEx_EncoderIndexCallback(TIM_HandleTypeDef *htim)
-{
-    if (htim->Instance == TIM3)
-    {
-        tMC.Encoder.Index = 1; // 设置Index脉冲检测标志
-        // printf("TIM3->CNT = %d\r\n", TIM3->CNT); // 打印当前计数值，验证Index功能
-        // led_r_toggle(); // 调试用LED指示
-    }
-}
+// void HAL_TIMEx_EncoderIndexCallback(TIM_HandleTypeDef *htim)
+// {
+//     if (htim->Instance == TIM3)
+//     {
+//         tMC.Encoder.Index = 1; // 设置Index脉冲检测标志
+//         // printf("TIM3->CNT = %d\r\n", TIM3->CNT); // 打印当前计数值，验证Index功能
+//         // led_r_toggle(); // 调试用LED指示
+//     }
+// }
 
 /**
  * @brief 定时器中断回调函数
@@ -56,16 +56,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 /**
  * @brief 注入组ADC转换完成中断回调函数
  */
-void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef *hadc)
-{
-    tMC.Sample.IuRaw = ADC2->JDR1;            // 获取U相电流
-    tMC.Sample.IwRaw = ADC2->JDR2;            // 获取W相电流
-    tMC.Sample.UdcRaw = tMC.Sample.AdcBuff[0]; // 获取母线电压
-    tMC.Encoder.EncoderVal = TIM3->CNT;       // 获取编码器值
+// void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef *hadc)
+// {
+//     tMC.Sample.IuRaw = ADC2->JDR1;            // 获取U相电流
+//     tMC.Sample.IwRaw = ADC2->JDR2;            // 获取W相电流
+//     tMC.Sample.UdcRaw = tMC.Sample.AdcBuff[0]; // 获取母线电压
+//     // tMC.Encoder.EncoderVal = TIM3->CNT;       // 获取编码器值
 
-    motor_ctrl(); // 电机控制
+//     motor_ctrl(); // 电机控制
 
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, tMC.Foc.DutyCycleA); // 更新PWMA比较值
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, tMC.Foc.DutyCycleB); // 更新PWMB比较值
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, tMC.Foc.DutyCycleC); // 更新PWMC比较值
-}
+//     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, tMC.Foc.DutyCycleA); // 更新PWMA比较值
+//     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, tMC.Foc.DutyCycleB); // 更新PWMB比较值
+//     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, tMC.Foc.DutyCycleC); // 更新PWMC比较值
+// }
