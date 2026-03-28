@@ -1,0 +1,10 @@
+# IAR .dep files
+*.dep
+
+# IAR settings  
+**/settings/
+
+# IAR Debug
+**/EWARM/Thread_I/
+**/EWARM/Thread_II/
+**/EWARM/Thread_III/

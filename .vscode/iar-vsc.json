@@ -1,0 +1,15 @@
+{
+  "workspace": {
+    "path": "${workspaceFolder}\\Thread_I\\EWARM\\Project.eww"
+  },
+  "workspaces": {
+    "${workspaceFolder}\\Thread_I\\EWARM\\Project.eww": {
+      "configs": {
+        "${workspaceFolder}\\Thread_I\\EWARM\\Thread_I.ewp": "Thread_I"
+      },
+      "selected": {
+        "path": "${workspaceFolder}\\Thread_I\\EWARM\\Thread_I.ewp"
+      }
+    }
+  }
+}
