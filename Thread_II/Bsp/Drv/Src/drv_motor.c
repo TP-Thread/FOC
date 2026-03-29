@@ -25,9 +25,9 @@ void motor_init(void)
     tMC.Sample.CurrentFactor = CURRENT_FACTOR; // 相电流计算系数(由采样电阻值和放大倍数以及ADC分辨率计算得出)
     tMC.Sample.BusFactor = VBUS_FACTOR;        // 母线电压计算系数（由分压电阻计算得出）
 
-    tMC.Encoder.Dir = CCW;               // 设置编码器的方向（逆时针转动 角度从0向360度增加）
-    tMC.Encoder.PolePairs = POLEPAIRS;   // 设置电机的极对数（磁铁数除以2）
-    tMC.Encoder.EncoderValMax = PUL_MAX; // 设置编码器单圈脉冲的最大值4095
+    tMC.Encoder.Dir = CCW;             // 设置编码器的方向（逆时针转动 角度从0向360度增加）
+    tMC.Encoder.PolePairs = POLEPAIRS; // 设置电机的极对数（磁铁数除以2）
+    tMC.Encoder.EncoderValMax = PUL_MAX; // 设置编码器单圈脉冲的最大值
 
     tMC.Encoder.Index = 0; // Index脉冲检测标志清零
 
@@ -41,18 +41,18 @@ void motor_init(void)
 
     tMC.TAccDec.AccSpeed = ACCELERATION; // 设置速度模式下的加速度
 
-    tMC.Speed.ElectricalValMax = PUL_MAX;       // 设置编码器单圈脉冲的最大值
+    tMC.Speed.ElectricalValMax = PUL_MAX;         // 设置编码器单圈脉冲的最大值
     tMC.Speed.ElectricalSpeedLPFFactor = 0.05f; // 设置速度低通滤波系数
     tMC.Speed.ElectricalSpeedFactor = 146.5f;   // 设置速度计算系数
 
-    tMC.IqPid.Kp = 0.2f;   // 设置q轴PID比例系数
-    tMC.IqPid.Ki = 0.002f; // 设置q轴PID比例系数
-    tMC.IqPid.OutMax =  24 * 0.57735f;  // 设置q轴PID输出上限初始值为Ubus/√3，限制Uq
+    tMC.IqPid.Kp = 0.2f;              // 设置q轴PID比例系数
+    tMC.IqPid.Ki = 0.002f;            // 设置q轴PID比例系数
+    tMC.IqPid.OutMax = 24 * 0.57735f; // 设置q轴PID输出上限初始值为Ubus/√3，限制Uq
     tMC.IqPid.OutMin = -24 * 0.57735f;
 
-    tMC.IdPid.Kp = 0.2f;   // 设置d轴PID比例系数
-    tMC.IdPid.Ki = 0.002f; // 设置d轴PID比例系数
-    tMC.IdPid.OutMax =  24 * 0.57735f;  // 设置d轴PID输出上限初始值为Ubus/√3，限制Ud
+    tMC.IdPid.Kp = 0.2f;              // 设置d轴PID比例系数
+    tMC.IdPid.Ki = 0.002f;            // 设置d轴PID比例系数
+    tMC.IdPid.OutMax = 24 * 0.57735f; // 设置d轴PID输出上限初始值为Ubus/√3，限制Ud
     tMC.IdPid.OutMin = -24 * 0.57735f;
 
     tMC.SpdPid.Kp = 0.001f;    // 设置速度PID比例系数
@@ -310,7 +310,7 @@ void sensoruse_ctrl(void)
     /* 状态机 */
     switch (tMC.Motor.RunMode)
     {
-    case ENCODER_CALIB: // 编码器校准（基于Index脉冲的机械零点对齐）
+    case ENCODER_CALIB: /* 计算编码器零点与电角度零点的偏移量 */
     {
         if (tMC.Encoder.CalibFlag == 0) // 第一阶段：定位到90度
         {
@@ -329,12 +329,15 @@ void sensoruse_ctrl(void)
 
         if (tMC.Encoder.CalibFlag == 1) // 第二阶段：缓慢旋转寻找机械零点
         {
-            tMC.Foc.Uq = 0.5f;                                                                      // 施加q轴电压
-            tMC.Encoder.ElectricalSpdSet = 50;                                                      // 设置较低的开环转速
-            eangle_generator(&tMC.Encoder);                                                         // 生成递增的电角度
-            angle_calculate((int32_t)tMC.Encoder.ElectricalValSet, &tMC.Foc.SinVal, &tMC.Foc.CosVal); // 计算sin/cos值
+            /* 施加q轴电压 */
+            tMC.Foc.Uq = 0.5f;
+            /* 置较低的开环转速，生成递增的电角度 */
+            tMC.Encoder.ElectricalSpdSet = 50;
+            eangle_generator(&tMC.Encoder);
+            angle_calculate((int32_t)tMC.Encoder.ElectricalValSet, &tMC.Foc.SinVal, &tMC.Foc.CosVal);
 
-            if (tMC.Encoder.Index) // 检测Index脉冲
+            /* 定位到机械角度接近0度 */
+            if (tMC.Encoder.EncoderVal > 4050 || tMC.Encoder.EncoderVal < 50)
             {
                 tMC.Foc.Uq = 0;
                 tMC.Encoder.ElectricalSpdSet = 0;
@@ -380,8 +383,8 @@ void sensoruse_ctrl(void)
         /* 电流环 */
         tMC.Foc.Iu = tMC.Sample.IuReal;
         tMC.Foc.Iv = tMC.Sample.IvReal;
-        clarke_transform(&tMC.Foc);                                                               // Iu,Iv → Iα,Iβ
-        park_transform(&tMC.Foc);                                                                 // Iα,Iβ → Id,Iq
+        clarke_transform(&tMC.Foc);                                                                   // Iu,Iv → Iα,Iβ
+        park_transform(&tMC.Foc);                                                                     // Iα,Iβ → Id,Iq
         tMC.Foc.IdLPF = tMC.Foc.Id * tMC.Foc.IdLPFFactor + tMC.Foc.IdLPF * (1 - tMC.Foc.IdLPFFactor); // Id低通滤波
         tMC.Foc.IqLPF = tMC.Foc.Iq * tMC.Foc.IqLPFFactor + tMC.Foc.IqLPF * (1 - tMC.Foc.IqLPFFactor); // Iq低通滤波
         tMC.IqPid.Fbk = tMC.Foc.IqLPF;
@@ -404,7 +407,7 @@ void sensoruse_ctrl(void)
         {
             tMC.Speed.SpeedCalculateCnt = 0;
             tMC.Speed.ElectricalPosThis = tMC.Encoder.ElectricalVal; // 获取当前电角度
-            speed_calculate(&tMC.Speed);                            // 根据当前电角度和上次电角度计算电角速度
+            speed_calculate(&tMC.Speed);                             // 根据当前电角度和上次电角度计算电角速度
             tMC.Speed.ElectricalSpeedLPF = tMC.Speed.ElectricalSpeedRaw * tMC.Speed.ElectricalSpeedLPFFactor + tMC.Speed.ElectricalSpeedLPF * (1 - tMC.Speed.ElectricalSpeedLPFFactor);
             tMC.Speed.MechanicalSpeed = tMC.Speed.ElectricalSpeedLPF / tMC.Encoder.PolePairs; // 转换为机械速度
 
@@ -434,7 +437,7 @@ void sensoruse_ctrl(void)
                 tMC.SpdPid.Kp = tMC.SpdPid.KpMin; // 高速区，降低增益，防止超调
             }
 
-            pid_calculate(&tMC.SpdPid);    // 速度闭环PID计算
+            pid_calculate(&tMC.SpdPid);     // 速度闭环PID计算
             tMC.IqPid.Ref = tMC.SpdPid.Out; // 速度环输出作为电流环输入
         }
 
@@ -466,7 +469,7 @@ void sensoruse_ctrl(void)
         {
             tMC.Position.PosCalculateCnt = 0;
             tMC.Position.ElectricalPosThis = tMC.Encoder.ElectricalVal; // 获取当前位置
-            position_calculate(&tMC.Position);                         // 计算总位置
+            position_calculate(&tMC.Position);                          // 计算总位置
             tMC.PosPid.Fbk = tMC.Position.ElectricalPosSum;             // 反馈实际位置
             tMC.PosPid.Ref = tMC.Position.MechanicalPosSet * POLEPAIRS; // 给定目标位置
             tMC.Position.MechanicalPosRaw = tMC.Position.ElectricalPosSum / POLEPAIRS;
@@ -517,5 +520,5 @@ void sensoruse_ctrl(void)
     }
 
     /* SVPWM调制 */
-    svpwm_calculate(&tMC.Foc);        // 生成三相PWM占空比
+    svpwm_calculate(&tMC.Foc); // 生成三相PWM占空比
 }

@@ -60,8 +60,6 @@
 #define ENCODER_LINE 1024              // 编码器线数
 #define PUL_MAX (4 * ENCODER_LINE - 1) // 单圈脉冲最大值
 
-#define PUL_ANGLE_FACTOR (4095.0f / PUL_MAX) // 角度系数
-
 #define POLEPAIRS 7    // 默认极对数
 #define ACCELERATION 3 // 默认加速度
 
