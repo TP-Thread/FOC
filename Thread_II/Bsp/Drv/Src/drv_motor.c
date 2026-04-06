@@ -12,62 +12,55 @@
 
 #include "drv_motor.h"
 
-MotorCtrl_t tMC;
+/* 电机系统初始参数 */
+MotorCtrl_t tMC = {
+    .Motor.RunState = CURRENT_CALIB, // 设置电机最初的运行状态
+    .Motor.RunMode = ENCODER_CALIB,  // 设置电机最初的运行模式
 
-/**
- * @brief 电机系统参数初始化
- */
-void motor_init(void)
-{
-    tMC.Motor.RunState = CURRENT_CALIB; // 设置电机最初的运行状态
-    tMC.Motor.RunMode = ENCODER_CALIB;  // 设置电机最初的运行模式
+    .Sample.CurrentFactor = CURRENT_FACTOR, // 相电流计算系数(由采样电阻值和放大倍数以及ADC分辨率计算得出)
+    .Sample.BusFactor = VBUS_FACTOR,        // 母线电压计算系数（由分压电阻计算得出）
+    .Encoder.Dir = CCW,             // 设置编码器的方向（逆时针
+    .Encoder.PolePairs = POLEPAIRS, // 设置电机的极对数（磁铁数除以2）
+    .Encoder.EncoderValMax = PUL_MAX, // 设置编码器单圈 脉冲的最大值
+    .Encoder.Index = 0, // Index脉冲检测标志清零
+    .Foc.IdLPFFactor = 0.1f,   // 设置d轴电流低通滤波系数
+    .Foc.IqLPFFactor = 0.1f,   // 设置q轴电流低通滤波系数
+    .Foc.Ubus = 24,            // 设置母线电压
+    .Foc.PwmCycle = PWM_CYCLE, // 设置PWM周期
+    .Foc.PwmLimit = PWM_LIMLT, // 设置PWM限幅值
+    .Position.ElectricalValMax = PUL_MAX, // 设置编码器单圈脉冲的最大值
+    .TAccDec.AccSpeed = ACCELERATION, // 设置速度模式下的加速度
+    .Speed.ElectricalValMax = PUL_MAX,         // 设置编码器单圈脉冲的最大值
+    .Speed.ElectricalSpeedLPFFactor = 0.05f, // 设置速度低通滤波系数
+    .Speed.ElectricalSpeedFactor = 146.5f,   // 设置速度计算系数
 
-    tMC.Sample.CurrentFactor = CURRENT_FACTOR; // 相电流计算系数(由采样电阻值和放大倍数以及ADC分辨率计算得出)
-    tMC.Sample.BusFactor = VBUS_FACTOR;        // 母线电压计算系数（由分压电阻计算得出）
+    /* 转矩PID参数 */
+    .IqPid.Kp = 0.2f,
+    .IqPid.Ki = 0.002f,
+    .IqPid.OutMax = 24 * 0.57735f, /* 设置q轴PID输出上限初始值为Ubus/√3，限制Uq */
+    .IqPid.OutMin = -24 * 0.57735f,
 
-    tMC.Encoder.Dir = CCW;             // 设置编码器的方向（逆时针转动 角度从0向360度增加）
-    tMC.Encoder.PolePairs = POLEPAIRS; // 设置电机的极对数（磁铁数除以2）
-    tMC.Encoder.EncoderValMax = PUL_MAX; // 设置编码器单圈脉冲的最大值
+    /* 磁通PID参数 */
+    .IdPid.Kp = 0.2f,
+    .IdPid.Ki = 0.002f,
+    .IdPid.OutMax = 24 * 0.57735f, /* 设置d轴PID输出上限初始值为Ubus/√3，限制Ud */
+    .IdPid.OutMin = -24 * 0.57735f,
 
-    tMC.Encoder.Index = 0; // Index脉冲检测标志清零
+    /* 速度PID参数 */
+    .SpdPid.Kp = 0.001f,
+    .SpdPid.KpMax = 0.005f,
+    .SpdPid.KpMin = 0.001f,
+    .SpdPid.Ki = 0.000002f,
+    .SpdPid.OutMax = 8, /* 速度PID输出上限,4006电机适配40A电调，IqPid.Ref限制为单相最大电流/√3 */
+    .SpdPid.OutMin = -8,
 
-    tMC.Foc.IdLPFFactor = 0.1f;   // 设置d轴电流低通滤波系数
-    tMC.Foc.IqLPFFactor = 0.1f;   // 设置q轴电流低通滤波系数
-    tMC.Foc.Ubus = 24;            // 设置母线电压
-    tMC.Foc.PwmCycle = PWM_CYCLE; // 设置PWM周期
-    tMC.Foc.PwmLimit = PWM_LIMLT; // 设置PWM限幅值
-
-    tMC.Position.ElectricalValMax = PUL_MAX; // 设置编码器单圈脉冲的最大值
-
-    tMC.TAccDec.AccSpeed = ACCELERATION; // 设置速度模式下的加速度
-
-    tMC.Speed.ElectricalValMax = PUL_MAX;         // 设置编码器单圈脉冲的最大值
-    tMC.Speed.ElectricalSpeedLPFFactor = 0.05f; // 设置速度低通滤波系数
-    tMC.Speed.ElectricalSpeedFactor = 146.5f;   // 设置速度计算系数
-
-    tMC.IqPid.Kp = 0.2f;              // 设置q轴PID比例系数
-    tMC.IqPid.Ki = 0.002f;            // 设置q轴PID比例系数
-    tMC.IqPid.OutMax = 24 * 0.57735f; // 设置q轴PID输出上限初始值为Ubus/√3，限制Uq
-    tMC.IqPid.OutMin = -24 * 0.57735f;
-
-    tMC.IdPid.Kp = 0.2f;              // 设置d轴PID比例系数
-    tMC.IdPid.Ki = 0.002f;            // 设置d轴PID比例系数
-    tMC.IdPid.OutMax = 24 * 0.57735f; // 设置d轴PID输出上限初始值为Ubus/√3，限制Ud
-    tMC.IdPid.OutMin = -24 * 0.57735f;
-
-    tMC.SpdPid.Kp = 0.001f;    // 设置速度PID比例系数
-    tMC.SpdPid.KpMax = 0.005f; // 设置速度PID比例系数最大值（用于分段或模糊PID）
-    tMC.SpdPid.KpMin = 0.001f; // 设置速度PID比例系数最小值（用于分段或模糊PID）
-    tMC.SpdPid.Ki = 0.000002f; // 设置速度PID积分系数
-    tMC.SpdPid.OutMax = 8;     // 设置速度PID输出上限,4006电机适配40A电调，IqPid.Ref限制为单相最大电流/√3
-    tMC.SpdPid.OutMin = -8;    // 设置速度PID输出下限
-
-    tMC.PosPid.Kp = 0.5f;       // 设置位置PID比例系数
-    tMC.PosPid.Ki = 0;          // 设置位置PID积分系数
-    tMC.PosPid.Kd = 0;          // 设置位置PID微分系数
-    tMC.PosPid.OutMax = 14000;  // 设置位置PID输出上限
-    tMC.PosPid.OutMin = -14000; // 设置位置PID输出下限
-}
+    /* 位置PID参数 */
+    .PosPid.Kp = 0.5f,
+    .PosPid.Ki = 0,
+    .PosPid.Kd = 0,
+    .PosPid.OutMax = 14000,
+    .PosPid.OutMin = -14000,
+};
 
 /********************************************************************************
  * 相电流和母线电压计算
@@ -359,7 +352,7 @@ void sensoruse_ctrl(void)
                 tMC.Encoder.CalibFlag = 0;
                 tMC.Encoder.CalibOffset = tMC.Encoder.EncoderVal; // 记录编码器零点与电角度零点的偏移量
 
-                tMC.Motor.RunMode = POS_SPEED_CURRENT_LOOP; // 完成转子校准，进入控制模式
+                tMC.Motor.RunMode = SPEED_CURRENT_LOOP; // 完成转子校准，进入控制模式
 
                 /* 初始化位置累加器为0 */
                 tMC.Position.ElectricalPosSum = 0;

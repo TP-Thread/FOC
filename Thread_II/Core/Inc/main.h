@@ -56,15 +56,12 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 extern ADC_HandleTypeDef hadc2;
-extern SPI_HandleTypeDef hspi3;
+extern SPI_HandleTypeDef hspi1;
 extern TIM_HandleTypeDef htim1;
-extern TIM_HandleTypeDef htim2;
-extern TIM_HandleTypeDef htim3;
 extern UART_HandleTypeDef huart1;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 
 /* USER CODE END EFP */
-extern SPI_HandleTypeDef hspi1;
 
 /* Private defines -----------------------------------------------------------*/
 #define LED_B_Pin GPIO_PIN_13

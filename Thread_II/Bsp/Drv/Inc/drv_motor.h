@@ -68,8 +68,8 @@
 
 typedef struct
 {
-    uint8_t RunState; // 运行状态
-    uint8_t RunMode;  // 运行模式
+    uint8_t RunState;
+    uint8_t RunMode;
 } Motor_t;
 
 typedef struct
@@ -172,7 +172,6 @@ typedef struct
 
 extern MotorCtrl_t tMC;
 
-void motor_init(void);
 void motor_ctrl(void);
 
 void sensoruse_ctrl(void);

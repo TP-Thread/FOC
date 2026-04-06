@@ -15,10 +15,6 @@
 #include "drv_kth78.h"
 
 /* Private variables ---------------------------------------------------------*/
-extern volatile uint16_t LedTaskTim;
-extern volatile uint16_t LcdTaskTim;
-extern volatile uint16_t KeyTaskTim;
-extern volatile uint16_t UsartTaskTim;
 
 /* Private functions ---------------------------------------------------------*/
 /**
@@ -29,14 +25,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     if (htim->Instance == htim1.Instance) // 20KHz触发频率
     {
         HAL_ADCEx_InjectedStart_IT(&hadc2); // 启动注入组ADC转换，并开启转换完成中断
-    }
-
-    if (htim->Instance == htim2.Instance) // 10KHz触发频率
-    {
-        LedTaskTim++;   // LED任务计时
-        LcdTaskTim++;   // LCD任务计时
-        KeyTaskTim++;   // 按键扫描任务计时
-        UsartTaskTim++; // 串口任务计时
     }
 }
 

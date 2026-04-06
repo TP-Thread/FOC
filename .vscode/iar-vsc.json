@@ -1,6 +1,6 @@
 {
   "workspace": {
-    "path": "${workspaceFolder}\\Thread_I\\EWARM\\Project.eww"
+    "path": "${workspaceFolder}\\Thread_II\\EWARM\\Project.eww"
   },
   "workspaces": {
     "${workspaceFolder}\\Thread_I\\EWARM\\Project.eww": {
@@ -10,6 +10,17 @@
       "selected": {
         "path": "${workspaceFolder}\\Thread_I\\EWARM\\Thread_I.ewp"
       }
+    },
+    "${workspaceFolder}\\Thread_II\\EWARM\\Project.eww": {
+      "configs": {
+        "${workspaceFolder}\\Thread_II\\EWARM\\Thread_II.ewp": "Thread_II"
+      },
+      "selected": {
+        "path": "${workspaceFolder}\\Thread_II\\EWARM\\Thread_II.ewp"
+      }
     }
+  },
+  "workbench": {
+    "path": "D:\\EIDE\\IAR"
   }
 }

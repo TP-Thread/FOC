@@ -1125,9 +1125,6 @@
                     <name>$PROJ_DIR$\..\Bsp\Drv\Src\drv_kth78.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\Bsp\Drv\Src\drv_lcd.c</name>
-                </file>
-                <file>
                     <name>$PROJ_DIR$\..\Bsp\Drv\Src\drv_motor.c</name>
                 </file>
             </group>
@@ -1138,9 +1135,6 @@
                 <name>Task</name>
                 <file>
                     <name>$PROJ_DIR$\..\Bsp\Task\Src\task_loop.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\Bsp\Task\Src\task_uart.c</name>
                 </file>
             </group>
         </group>
