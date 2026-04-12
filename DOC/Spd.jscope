@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<JScopeProject>
+    <FileVersion major="1" minor="1" />
+    <Project>
+        <Configuration>
+            <JLink>
+                <Options Connection="1" IsRTTSession="0" IsRTTWithTimeStamp="0" IsRTTPlus="0" SamplingPeriod="100" SerialNo="0" JTAG_IRPre="0" JTAG_DRPre="0" IP="" TargetDevice="GD32F303RBT6" Nickname="" TargetInterface="SWD" InterfaceSpeed="1000" />
+            </JLink>
+            <ElfFile Name="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project\output\project.axf" />
+            <Scope>
+                <Options TimeResolutionUs="1000000" />
+            </Scope>
+            <Trigger>
+                <Options Level="0" Symbol="speed_mech" On="0" Auto="0" Rise="0" Fall="0" />
+            </Trigger>
+        </Configuration>
+        <Windows>
+            <Graph Show="1" />
+            <Watch Show="1" />
+        </Windows>
+        <SelectedSymbols>
+            <Symbol>
+                <Options Name="speed_mech" Address="0x20000050" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="85" GraphColorBlue="255" YMinSampled="-142.362" YMaxSampled="1110.26" YAvgSampled="321.879" Offset="4" ShowInGraph="1" YOffset="0" IsAutoConfig="0" YResolution="200" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.speed_mech" />
+            </Symbol>
+            <Symbol>
+                <Options Name="ia" Address="0x20000068" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="0" GraphColorBlue="0" YMinSampled="-0.315947" YMaxSampled="0.26658" YAvgSampled="0.00136305" Offset="8" ShowInGraph="0" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.ia" />
+            </Symbol>
+            <Symbol>
+                <Options Name="ib" Address="0x2000006C" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="0" GraphColorBlue="255" YMinSampled="-0.276453" YMaxSampled="0.286327" YAvgSampled="0.00554278" Offset="12" ShowInGraph="0" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.ib" />
+            </Symbol>
+            <Symbol>
+                <Options Name="ic" Address="0x20000070" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="-0.306073" YMaxSampled="0.345567" YAvgSampled="-0.00682437" Offset="16" ShowInGraph="0" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.ic" />
+            </Symbol>
+            <Symbol>
+                <Options Name="speed_ref" Address="0x200000A4" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="0" YMaxSampled="1000" YAvgSampled="356.937" Offset="20" ShowInGraph="1" YOffset="0" IsAutoConfig="0" YResolution="200" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.speed_ref" />
+            </Symbol>
+        </SelectedSymbols>
+    </Project>
+</JScopeProject>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<JScopeProject>
+    <FileVersion major="1" minor="1" />
+    <Project>
+        <Configuration>
+            <JLink>
+                <Options Connection="1" IsRTTSession="0" IsRTTWithTimeStamp="0" IsRTTPlus="0" SamplingPeriod="100" SerialNo="0" JTAG_IRPre="0" JTAG_DRPre="0" IP="" TargetDevice="GD32F303RBT6" Nickname="" TargetInterface="SWD" InterfaceSpeed="1000" />
+            </JLink>
+            <ElfFile Name="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project\output\project.axf" />
+            <Scope>
+                <Options TimeResolutionUs="1000000" />
+            </Scope>
+            <Trigger>
+                <Options Level="0" Symbol="angle_mech" On="0" Auto="0" Rise="0" Fall="0" />
+            </Trigger>
+        </Configuration>
+        <Windows>
+            <Graph Show="1" />
+            <Watch Show="1" />
+        </Windows>
+        <SelectedSymbols>
+            <Symbol>
+                <Options Name="angle_mech" Address="0x2000004C" Type="float" TypeID="1" Size="4" GraphColorRed="85" GraphColorGreen="170" GraphColorBlue="255" YMinSampled="1.99967" YMaxSampled="6.02201" YAvgSampled="4.23694" Offset="4" ShowInGraph="1" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.angle_mech" />
+            </Symbol>
+            <Symbol>
+                <Options Name="angle_joint" Address="0x20000054" Type="float" TypeID="1" Size="4" GraphColorRed="85" GraphColorGreen="255" GraphColorBlue="127" YMinSampled="0.0467079" YMaxSampled="0.287121" YAvgSampled="0.0995732" Offset="8" ShowInGraph="0" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.angle_joint" />
+            </Symbol>
+            <Symbol>
+                <Options Name="iq_lpf" Address="0x20000088" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="0" GraphColorBlue="255" YMinSampled="-0.824378" YMaxSampled="4.238" YAvgSampled="-0.0637042" Offset="12" ShowInGraph="0" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.iq_lpf" />
+            </Symbol>
+            <Symbol>
+                <Options Name="position_ref" Address="0x200000AC" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="0" GraphColorBlue="0" YMinSampled="2" YMaxSampled="6" YAvgSampled="4.24144" Offset="16" ShowInGraph="1" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.position_ref" />
+            </Symbol>
+        </SelectedSymbols>
+    </Project>
+</JScopeProject>

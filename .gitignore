@@ -5,6 +5,6 @@
 **/settings/
 
 # IAR Debug
-**/EWARM/Thread_I/
-**/EWARM/Thread_II/
-**/EWARM/Thread_III/
+**/IAR_project/Debug/
+
+**/Keil_project/output/

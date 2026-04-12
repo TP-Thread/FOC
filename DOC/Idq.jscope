@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<JScopeProject>
+    <FileVersion major="1" minor="1" />
+    <Project>
+        <Configuration>
+            <JLink>
+                <Options Connection="1" IsRTTSession="0" IsRTTWithTimeStamp="0" IsRTTPlus="0" SamplingPeriod="100" SerialNo="0" JTAG_IRPre="0" JTAG_DRPre="0" IP="" TargetDevice="GD32F303RBT6" Nickname="" TargetInterface="SWD" InterfaceSpeed="1000" />
+            </JLink>
+            <ElfFile Name="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project\output\project.axf" />
+            <Scope>
+                <Options TimeResolutionUs="1000000" />
+            </Scope>
+            <Trigger>
+                <Options Level="0" Symbol="id" On="0" Auto="0" Rise="0" Fall="0" />
+            </Trigger>
+        </Configuration>
+        <Windows>
+            <Graph Show="1" />
+            <Watch Show="1" />
+        </Windows>
+        <SelectedSymbols>
+            <Symbol>
+                <Options Name="id" Address="0x2000007C" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="0" GraphColorBlue="255" YMinSampled="-0.315947" YMaxSampled="2.06353" YAvgSampled="0.723644" Offset="4" ShowInGraph="0" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.id" />
+            </Symbol>
+            <Symbol>
+                <Options Name="iq" Address="0x20000080" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="255" GraphColorBlue="255" YMinSampled="-0.0684047" YMaxSampled="2.04073" YAvgSampled="0.446824" Offset="8" ShowInGraph="1" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.iq" />
+            </Symbol>
+            <Symbol>
+                <Options Name="id_lpf" Address="0x20000084" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="0" GraphColorBlue="255" YMinSampled="-0.323367" YMaxSampled="2.00463" YAvgSampled="0.723587" Offset="12" ShowInGraph="0" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.id_lpf" />
+            </Symbol>
+            <Symbol>
+                <Options Name="iq_lpf" Address="0x20000088" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="-0.00865296" YMaxSampled="2.00582" YAvgSampled="0.446825" Offset="16" ShowInGraph="0" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.iq_lpf" />
+            </Symbol>
+            <Symbol>
+                <Options Name="id_ref" Address="0x2000009C" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="0" GraphColorBlue="0" YMinSampled="0" YMaxSampled="2" YAvgSampled="0.723585" Offset="20" ShowInGraph="0" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.id_ref" />
+            </Symbol>
+            <Symbol>
+                <Options Name="iq_ref" Address="0x200000A0" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="0" YMaxSampled="2" YAvgSampled="0.446927" Offset="24" ShowInGraph="1" YOffset="0" IsAutoConfig="0" YResolution="1" MaxValue="-2147483648" File="E:\Roborock\Code\Backup\motor-drive-core\FOC\Project\Keil_project/..\..\Motor\Inc\motor_ctrl.h" DrawStyle="0" NameWithParents="motor.iq_ref" />
+            </Symbol>
+        </SelectedSymbols>
+    </Project>
+</JScopeProject>

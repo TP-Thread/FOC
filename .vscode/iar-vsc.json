@@ -1,26 +1,15 @@
 {
   "workspace": {
-    "path": "${workspaceFolder}\\Thread_II\\EWARM\\Project.eww"
+    "path": "${workspaceFolder}\\FOC\\Project\\IAR_project\\FOC_Project.eww"
   },
   "workspaces": {
-    "${workspaceFolder}\\Thread_I\\EWARM\\Project.eww": {
+    "${workspaceFolder}\\FOC\\Project\\IAR_project\\FOC_Project.eww": {
       "configs": {
-        "${workspaceFolder}\\Thread_I\\EWARM\\Thread_I.ewp": "Thread_I"
+        "${workspaceFolder}\\FOC\\Project\\IAR_project\\FOC_Project.ewp": "Debug"
       },
       "selected": {
-        "path": "${workspaceFolder}\\Thread_I\\EWARM\\Thread_I.ewp"
-      }
-    },
-    "${workspaceFolder}\\Thread_II\\EWARM\\Project.eww": {
-      "configs": {
-        "${workspaceFolder}\\Thread_II\\EWARM\\Thread_II.ewp": "Thread_II"
-      },
-      "selected": {
-        "path": "${workspaceFolder}\\Thread_II\\EWARM\\Thread_II.ewp"
+        "path": "${workspaceFolder}\\FOC\\Project\\IAR_project\\FOC_Project.ewp"
       }
     }
-  },
-  "workbench": {
-    "path": "D:\\EIDE\\IAR"
   }
 }
